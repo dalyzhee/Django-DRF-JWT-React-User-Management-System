@@ -1,164 +1,157 @@
-# User Management System (Django + DRF + JWT + React)
+# User Management System  
+**Django + Django REST Framework + JWT + React + Flutter**
 
-A full-stack user management system with:
-
-- User registration and login
-- JWT authentication
-- Protected profile
-- Admin user management
-- React frontend with API integration
+A full-stack user management system built with:
+- A secure Django REST API backend
+- A React web dashboard
+- A Flutter mobile application
 
 ---
 
-## Backend: Django + DRF + JWT
+## Backend – Django + DRF + JWT
 
 ### Features
 
-- Custom user model with roles
-- JWT authentication (access & refresh tokens)
-- API endpoints:
-  - `/api/register/` → Create new user
-  - `/api/login/` → Obtain JWT
-  - `/api/refresh/` → Refresh access token
-  - `/api/profile/` → Retrieve logged-in user profile
-  - `/api/users/` → Admin-only: list all users
+- User Registration
+- JWT Authentication (Access + Refresh)
+- Role-Based Access Control
+- Protected Profile APIs
+- Admin User Management
 
-### Screenshots
+### Tech Stack
+
+- Python
+- Django
+- Django REST Framework (DRF)
+- djangorestframework-simplejwt
+
+### API Endpoints
+
+| Method | Endpoint            | Description                  |
+|--------|---------------------|------------------------------|
+| POST   | `/api/register/`    | Register a user              |
+| POST   | `/api/login/`       | Login and get JWT tokens     |
+| POST   | `/api/token/refresh/` | Refresh JWT access token   |
+| GET    | `/api/profile/`     | Get user profile (Protected) |
+| GET    | `/api/users/`       | Admin-only user list         |
+
+### Backend Setup
+
+```bash
+git clone <your-repo-url>
+cd backend
+
+python -m venv venv
+venv\Scripts\activate   # Windows
+source venv/bin/activate # Mac/Linux
+
+pip install -r requirements.txt
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
+```
+
+### Screenshots React
 ### Register Page
 ![Alt text](images/register.png)
 ### Login Page
 ![Alt text](images/login.png)
 ### Dashbaord
 ![Alt text](images/dashbaord.png)
+
+### Screenshots Flutter
+### Register Page
+![Alt text](images/flutter_register.png)
+### Login Page
+![Alt text](images/flutter_login.png)
+### Dashbaord
+![Alt text](images/flutter_dashboard.png)
 ### Setup Instructions
 
-1. Clone the repository:
+# Frontend – React Web App
+### Features
 
-```bash
-git clone https://github.com/dalyzhee/Django-DRF-JWT-React-User-Management-System.git
-cd config
-```
+- Login & Registration UI
 
-2. Create a virtual environment and install dependencies:
+- JWT token handling
 
-```
-python -m venv venv
-# Windows
-venv\Scripts\activate
-# macOS / Linux
-source venv/bin/activate
-pip install -r requirements.txt
-```
+- Protected dashboard
 
-3. Run migrations:
+- User profile page
 
-```
-python manage.py makemigrations
-python manage.py migrate
-```
-
-4. Create superuser (optional, for admin access):
-```
-python manage.py createsuperuser
-```
-
-Run the server:
-```
-python manage.py runserver
-```
-
-API will be available at:
-
-http://127.0.0.1:8000/api/
-
-## Project Structure
-
-backend/
-├─ config/
-│  ├─ settings.py
-│  └─ urls.py
-├─ users/
-│  ├─ models.py
-│  ├─ serializers.py
-│  ├─ views.py
-│  └─ urls.py
-└─ manage.py
-
-# Frontend: React
-## Features
-
-1. Registration page
-2. Login page with JWT authentication
-3. Protected profile page
-4. Axios with JWT interceptor
-5. Routing with react-router-dom
-
-## Setup Instructions
-
-Navigate to the frontend folder:
-
+### React Setup
 ```
 cd client
-```
-
-Install dependencies:
-```
 npm install
-```
-
-Run the development server:
-```
 npm start
 ```
 
-React app will be available at:
+### Runs on:
 ```
-http://localhost:3000/
+http://localhost:3000
 ```
 
-## Project Structure
+### React API Config Example
+```
+export const BASE_URL = "http://127.0.0.1:8000/api";
+```
 
-client/
-├─ src/
-│  ├─ api.js          # Axios instance with JWT interceptor
-│  ├─ App.js          # Routing
-│  ├─ Register.js
-│  ├─ Login.js
-│  └─ Profile.js
-└─ package.json
+# Mobile App – Flutter
+### Features
 
-# Usage
+- User Login & Registration
 
-1. Start Django backend first (python manage.py runserver)
+- JWT Token Storage
 
-2. Start React frontend (npm start)
+- Protected Profile Screen
 
-3. Open browser at http://localhost:3000
+- Logout Functionality
 
-4. Register a new user or login with an existing account
+### Flutter Setup
+```
+cd flutter_app   # or your folder name
+flutter pub get
+flutter run
+```
 
-5. Access protected profile page after login
+### Flutter API Config
+```
+static const String baseUrl = 'http://10.0.2.2:8000/api';
+```
 
-# Notes
+### For real devices:
+```
+http://YOUR_PC_IP:8000/api
+```
 
-JWT tokens are stored in localStorage
-React automatically sends token in Authorization header for protected endpoints
+# Project Structure
+user-management-system/
+├── config/        # Django API
+├── client/         # React Frontend
+├── flutter_app/    # Flutter Mobile App
+└── images/    # App screenshots
 
-For development, CORS is enabled for all origins
 
-Admin can access /api/users/ to see all users
+# Application Flow
 
-# Next Steps / Improvements
+1. User registers from React or Flutter
 
-- Add password reset functionality
+2. Django API creates the user
 
-- Implement role-based dashboards
+3. User logs in and receives JWT tokens
 
-- Add refresh token logic on frontend
+4. React/Flutter store the tokens
 
-- Use environment variables for API URL in React
+5. Protected APIs become accessible
 
-- Deploy backend (e.g., Heroku, DigitalOcean) and frontend (Netlify, Vercel)
+# Security
+
+- JWT-based authentication
+
+- Secure password hashing
+
+- Protected API endpoints
 
 # Contact / Author
 
